@@ -2,15 +2,16 @@ from flask import Flask, render_template, request
 import json
 
 import FileReader
-
-with open('./AMZN.json', 'r', encoding='utf-8') as f:
-    data = json.load(f)
-testJson = data
-stock_price=[]
-stock_date=[]
-for i in testJson:
-    stock_price.append(i['Close'])
-    stock_date.append(i['Time'])
+def fileReader(comp):
+    with open('./'+comp+'.json', 'r', encoding='utf-8') as f:
+        data = json.load(f)
+    testJson = data
+    stock_price=[]
+    stock_date=[]
+    for i in testJson:
+        stock_price.append(i['Close'])
+        stock_date.append(i['Time'])
+    return stock_price,stock_date
 
 app = Flask(__name__)
 
@@ -22,6 +23,7 @@ text="123"
 def company():
     # print("aaaaa")
     ops = request.args.get('ops')
+    stock_price,stock_date=fileReader(ops)
     closePrice= stock_price[len(stock_price)-1]
     result={"res":ops,"close":closePrice}
     return result
