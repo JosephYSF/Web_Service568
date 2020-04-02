@@ -10,62 +10,12 @@ function comp(x) {
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
             var responseText = xmlHttp.responseText;
             var obj = JSON.parse(responseText);
-            var CN = obj['res'];
+            var compName = obj['res'];
+            var closePrice = obj['close'];
             // document.getElementById("result").innerHTML = data;
             if (true)
-                {document.getElementById("compname").innerHTML = CN;
-                alert("display")}
-        } else if (xmlHttp.readyState == 4) {
-            var error = "Wrong Input";
-            // document.getElementById("result").innerHTML = error;
-            // document.getElementById("InputMessage").innerHTML = error;
-        }
-        console.log(xmlHttp.responseText);
-    };
-    xmlHttp.send(null);
-}
-function comp_2() {
-    // alert("sdfadfasdfasdfqwefsdaf");
-    clearCache();
-    var xmlHttp = new XMLHttpRequest();
-    var url = "/comp" + "?ops=1";
-    // document.getElementById('whatis').scrollIntoView();
-    // loading();
-    xmlHttp.open("GET", url, true);
-    xmlHttp.onreadystatechange = function () {
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-            var responseText = xmlHttp.responseText;
-            var obj = JSON.parse(responseText);
-            var CN = obj['res'];
-            // document.getElementById("result").innerHTML = data;
-            if (true)
-                {document.getElementById("compname").innerHTML = CN;
-                alert("display")}
-        } else if (xmlHttp.readyState == 4) {
-            var error = "Wrong Input";
-            // document.getElementById("result").innerHTML = error;
-            // document.getElementById("InputMessage").innerHTML = error;
-        }
-        console.log(xmlHttp.responseText);
-    };
-    xmlHttp.send(null);
-}
-function comp_3() {
-    // alert("sdfadfasdfasdfqwefsdaf");
-    clearCache();
-    var xmlHttp = new XMLHttpRequest();
-    var url = "/comp" + "?ops=1";
-    // document.getElementById('whatis').scrollIntoView();
-    // loading();
-    xmlHttp.open("GET", url, true);
-    xmlHttp.onreadystatechange = function () {
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-            var responseText = xmlHttp.responseText;
-            var obj = JSON.parse(responseText);
-            var CN = obj['res'];
-            // document.getElementById("result").innerHTML = data;
-            if (true)
-                {document.getElementById("compname").innerHTML = CN;
+                {document.getElementById("compname").innerHTML = compName;
+                document.getElementById("Close").innerHTML = closePrice;
                 alert("display")}
         } else if (xmlHttp.readyState == 4) {
             var error = "Wrong Input";

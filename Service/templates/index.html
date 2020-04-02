@@ -253,9 +253,6 @@
                   <button type="button" class="btn btn-light bg-white btn-icon mr-3 d-none d-md-block ">
                     <i class="mdi mdi-download text-muted"></i>
                   </button>
-                    <button type="button" onclick="DDD()">
-                    adsfadfaf
-                  </button>
                   <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0">
                     <i class="mdi mdi-clock-outline text-muted"></i>
                   </button>
@@ -294,7 +291,7 @@
                                 <h5 class="mb-0 d-inline-block"><p id="compname">Company Name</h5>
                               </a>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkA">
-                                <button class="dropdown-item" onclick="comp(GOOG)">GOOG</button>
+                                <button class="dropdown-item" onclick="comp('AMZN')">Amazon</button>
                                 <button class="dropdown-item" onclick="comp(2)">comp2</button>
                                 <button class="dropdown-item" onclick="comp(3)">comp3</button>
                                 <button class="dropdown-item" onclick="comp(4)">comp4</button>
@@ -447,10 +444,8 @@
             <div class="col-md-7 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">Cash deposits</p>
-                  <p class="mb-4">To start a blog, think of a topic about and first brainstorm party is ways to write details</p>
-                  <div id="cash-deposits-chart-legend" class="d-flex justify-content-center pt-3"></div>
-                  <canvas id="cash-deposits-chart"></canvas>
+                  <h4 class="card-title">Line chart</h4>
+                  <canvas id="lineChart"></canvas>
                 </div>
               </div>
             </div>
@@ -591,6 +586,7 @@
   <script src="/static/js/data-table.js"></script>
   <script src="/static/js/jquery.dataTables.js"></script>
   <script src="/static/js/dataTables.bootstrap4.js"></script>
+  <script src="/static/js/chart.js"></script>
   <!-- Handmade JS-->
   <script src="/static/js/Handmade.js"></script>
   <!-- End custom js for this page-->
