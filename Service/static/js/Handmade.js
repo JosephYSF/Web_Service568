@@ -2,7 +2,7 @@ function comp(x) {
     // alert("sdfadfasdfasdfqwefsdaf");
     clearCache();
     var xmlHttp = new XMLHttpRequest();
-    var url = "/comp" + "?ops="+x;
+    var url = "/comp" + "?ops=" + x;
     // document.getElementById('whatis').scrollIntoView();
     // loading();
     xmlHttp.open("GET", url, true);
@@ -15,28 +15,27 @@ function comp(x) {
             var highPrice = obj['High'];
             var lowPrice = obj['Low'];
             var volume = obj['Volume'];
-            var alldate=obj['allDate'];
-            var date1=[]
-            for(var i=0;i<alldate.length;i++){
+            var alldate = obj['allDate'];
+            var date1 = []
+            for (var i = 0; i < alldate.length; i++) {
                 date1.push(alldate[i])
             }
-            var allClose=obj['allClose'];
-            var data1=[]
-            for(var i=0;i<allClose.length;i++){
+            var allClose = obj['allClose'];
+            var data1 = []
+            for (var i = 0; i < allClose.length; i++) {
                 data1.push(allClose[i])
             }
 
             // document.getElementById("result").innerHTML = data;
-            if (true)
-                {
-                    document.getElementById("compname").innerHTML = compName;
-                    document.getElementById("Close").innerHTML = closePrice;
-                    document.getElementById("High").innerHTML = highPrice;
-                    document.getElementById("Low").innerHTML = lowPrice;
-                    document.getElementById("Volume").innerHTML = volume;
+            if (true) {
+                document.getElementById("compname").innerHTML = compName;
+                document.getElementById("Close").innerHTML = closePrice;
+                document.getElementById("High").innerHTML = highPrice;
+                document.getElementById("Low").innerHTML = lowPrice;
+                document.getElementById("Volume").innerHTML = volume;
 
-                    // alert("display")
-                }
+                // alert("display")
+            }
             //  Chart Part
             var data = {
                 labels: date1,
@@ -382,7 +381,7 @@ function comp(x) {
                     data: browserTrafficData,
                     options: doughnutPieOptions
                 });
-    }
+            }
         } else if (xmlHttp.readyState == 4) {
             var error = "Wrong Input";
             // document.getElementById("result").innerHTML = error;
@@ -393,72 +392,6 @@ function comp(x) {
     xmlHttp.send(null);
 }
 
-function tempDown() {
-    clearCache();
-    var xmlHttp = new XMLHttpRequest();
-    var url = "/temp" + "?ops=1";
-
-    // document.getElementById('whatis').scrollIntoView();
-    // loading();
-    xmlHttp.open("GET", url, true);
-    xmlHttp.onreadystatechange = function () {
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-            var responseText = xmlHttp.responseText;
-
-        } else if (xmlHttp.readyState == 4) {
-            var error = "Wrong Input";
-            // document.getElementById("result").innerHTML = error;
-            document.getElementById("InputMessage").innerHTML = error;
-
-        }
-        console.log(xmlHttp.responseText);
-    };
-    xmlHttp.send(null);
-}
-
-function HumDown() {
-    var xmlHttp = new XMLHttpRequest();
-    var url = "/temp" + "?ops=-2";
-
-    // document.getElementById('whatis').scrollIntoView();
-    // loading();
-    xmlHttp.open("GET", url, true);
-    xmlHttp.onreadystatechange = function () {
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-            var responseText = xmlHttp.responseText;
-
-        } else if (xmlHttp.readyState == 4) {
-            var error = "Wrong Input";
-            // document.getElementById("result").innerHTML = error;
-            document.getElementById("InputMessage").innerHTML = error;
-
-        }
-        console.log(xmlHttp.responseText);
-    };
-    xmlHttp.send(null);
-}
-
-function HumUp() {
-    var xmlHttp = new XMLHttpRequest();
-    var url = "/temp" + "?ops=2";
-
-    // document.getElementById('whatis').scrollIntoView();
-    // loading();
-    xmlHttp.open("GET", url, true);
-    xmlHttp.onreadystatechange = function () {
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-            var responseText = xmlHttp.responseText;
-
-        } else if (xmlHttp.readyState == 4) {
-            var error = "Wrong Input";
-            // document.getElementById("result").innerHTML = error;
-            document.getElementById("InputMessage").innerHTML = error;
-
-        }
-        console.log(xmlHttp.responseText);
-    };
-    xmlHttp.send(null);
-}
 
 function display3() {
     var xmlHttp = new XMLHttpRequest();
@@ -476,9 +409,10 @@ function display3() {
             // }
             var CN = obj['res'];
             // document.getElementById("result").innerHTML = data;
-            if (true)
-                {document.getElementById("compname").innerHTML = CN;
-                console.log("aaaaa")}
+            if (true) {
+                document.getElementById("compname").innerHTML = CN;
+                console.log("aaaaa")
+            }
 
         } else if (xmlHttp.readyState == 4) {
             var error = "Wrong Input";
@@ -497,9 +431,10 @@ function display3() {
 // }
 
 function synchronous() {
-            display3();
-        }
-function Polling(){
+    display3();
+}
+
+function Polling() {
     synchronous();
     setInterval("synchronous()", 500);
 }
