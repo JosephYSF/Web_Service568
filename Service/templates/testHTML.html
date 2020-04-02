@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TestJSONPass</title>
+</head>
+<body>
+<h2>json test</h2>
+<p id="Date">
+    <script type="text/javascript">
+
+        var date = '{{date}}'
+        var json = JSON.parse(date);
+        document.getElementById("Date").innerHTML = json[0].Time;
+    </script>
+</p>
+
+</body>
+</html>
