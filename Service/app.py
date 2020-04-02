@@ -28,6 +28,7 @@ def predictor(comp,predict_len):
 
 #Using example, "AMZN" refers to companyname, 3 refers to prediction length
 y=predictor("AMZN",3)
+print(y)
 
 app = Flask(__name__)
 

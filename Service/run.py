@@ -2,13 +2,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import PolynomialFeatures
 import datetime
-import pandas_datareader.data as web
+# import pandas_datareader.data as web
 
-def history_data(stock,start,end):
-    start_time = datetime.datetime.strptime(start, "%Y,%m,%d")
-    end = datetime.datetime.strptime(end,"%Y,%m,%d")
-    company = web.DataReader(stock, "yahoo", start_time, end)
-    return company
+# def history_data(stock,start,end):
+#     start_time = datetime.datetime.strptime(start, "%Y,%m,%d")
+#     end = datetime.datetime.strptime(end,"%Y,%m,%d")
+#     company = web.DataReader(stock, "yahoo", start_time, end)
+#     return company
 
 def SSE_mesure(lenth):
     sum=0
