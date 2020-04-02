@@ -2,6 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import PolynomialFeatures
 import datetime
+
+
 # import pandas_datareader.data as web
 
 # def history_data(stock,start,end):
@@ -11,22 +13,25 @@ import datetime
 #     return company
 
 def SSE_mesure(lenth):
-    sum=0
+    sum = 0
     for i in range(lenth):
-        sum+=(y[i]-y_train[i])**2
+        sum += (y[i] - y_train[i]) ** 2
     return sum
 
+
 def R_square(lenth):
-    sum_1=SSE_mesure()
-    sum_2=0
+    sum_1 = SSE_mesure()
+    sum_2 = 0
     for i in range(lenth):
-        sum_2+=(y_train[i]-y_train.mean())**2
-    R_square_value=1-(sum_1/sum_2)
+        sum_2 += (y_train[i] - y_train.mean()) ** 2
+    R_square_value = 1 - (sum_1 / sum_2)
     return R_square_value
 
+
 def Adj_R_square(lenth):
-    Adj_R_square_value=1-(((1-R_square())*(lenth-1))/(lenth-M-1))
+    Adj_R_square_value = 1 - (((1 - R_square()) * (lenth - 1)) / (lenth - M - 1))
     return Adj_R_square_value
+
 
 class Bayesian_curvefitiing():
 
@@ -37,23 +42,23 @@ class Bayesian_curvefitiing():
         self.S = None
 
     def fit(self, X, t):
-        S_inv = self.alpha * np.eye(np.size(X, 1)) + self.beta * np.matmul(X.T,X)
+        S_inv = self.alpha * np.eye(np.size(X, 1)) + self.beta * np.matmul(X.T, X)
         mean_prev = np.linalg.solve(
             S_inv,
-            self.beta *  np.matmul(X.T,t)
+            self.beta * np.matmul(X.T, t)
         )
         self.mean_prev = mean_prev
         self.S = np.linalg.inv(S_inv)
 
-
     def predict(self, X):
-        y = np.matmul(X,self.mean_prev)
-        y_var = 1 / self.beta + np.sum(np.matmul(X,self.S) * X, axis=1)
+        y = np.matmul(X, self.mean_prev)
+        y_var = 1 / self.beta + np.sum(np.matmul(X, self.S) * X, axis=1)
         y_std = np.sqrt(y_var)
         return y, y_std
 
-def Auto_adjusted_M(x_train,y_train,x_test,lenth):
-    scores=[]
+
+def Auto_adjusted_M(x_train, y_train, x_test, lenth):
+    scores = []
     for i in range(20):
         poly_test = PolynomialFeatures(i)
         X_train = poly_test.fit_transform(x_train)
@@ -67,14 +72,16 @@ def Auto_adjusted_M(x_train,y_train,x_test,lenth):
             sum_1 += (y[j] - y_train[j]) ** 2
             sum_2 += (y_train[j] - y_train.mean()) ** 2
         R_square_value = 1 - (sum_1 / sum_2)
-        score=1-(((1-R_square_value)*(lenth-1))/(lenth-i-1))
+        score = 1 - (((1 - R_square_value) * (lenth - 1)) / (lenth - i - 1))
         scores.append(score)
     return scores
 
+
 def early_stop(scores):
     for i in range(20):
-        if scores[i+1]-scores[i]<=0.01 and scores[i+2]-scores[i-1]<=0.1:
+        if scores[i + 1] - scores[i] <= 0.01 and scores[i + 2] - scores[i - 1] <= 0.1:
             return i
+
 
 # stockprice = history_data('AAPL', "2016,1,1", "2017,1,1")['Close'].to_list()
 # x_train = np.linspace(1, 210, 210)
@@ -115,18 +122,18 @@ def early_stop(scores):
 # plt.legend(loc=2)
 # plt.show()
 
-def run(stock_price,predict_lenth):
-    lenth=len(stock_price)
-    pre_len=predict_lenth
+def run(stock_price, predict_lenth):
+    lenth = len(stock_price)
+    pre_len = predict_lenth
     x_train_set = np.linspace(1, lenth, lenth)
     x_train_set = x_train_set.reshape(-1, 1)
     y_train_set = stock_price
     y_train_set = np.array(y_train_set)
     y_train_set = y_train_set.reshape(lenth)
-    x_test_set = np.linspace(1, lenth, lenth+pre_len)
+    x_test_set = np.linspace(1, lenth, lenth + pre_len)
     x_test_set = x_test_set.reshape(-1, 1)
-    Ms_set=Auto_adjusted_M(x_train_set,y_train_set,x_test_set,lenth)
-    M_set=early_stop(Ms_set)
+    Ms_set = Auto_adjusted_M(x_train_set, y_train_set, x_test_set, lenth)
+    M_set = early_stop(Ms_set)
     poly = PolynomialFeatures(M_set)
     X_train = poly.fit_transform(x_train_set)
     X_test = poly.fit_transform(x_test_set)
@@ -134,4 +141,4 @@ def run(stock_price,predict_lenth):
     model = Bayesian_curvefitiing(alpha=5e-3, beta=11.1)
     model.fit(X_train, y_train_set)
     y, y_std = model.predict(X_test)
-    return y,y_std
+    return y, y_std

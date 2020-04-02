@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request
 import json
 
-import FileReader
+from Service import baysianPredict
+
+
 def fileReader(comp):
-    with open('./data/' + comp + '.json', 'r', encoding='utf-8') as f:
+    with open('/Users/mindyp/JosephYSF/data/' + comp + '.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
     testJson = data
     stock_price_close = []
@@ -24,29 +26,29 @@ def realTimeReader(comp):
     volume = []
     price = []
     time = []
-    with open('./data/' + comp + '_realtime_data.json', 'r', encoding='utf-8') as f:
+    with open('/Users/mindyp/JosephYSF/data/' + comp + '_realtime_data.json', 'r', encoding='utf-8') as f:
         data = json.loads(f.read())
-        print(type(data['Time']))
+        # print(type(data['Time']))
         time.append(data['Time'])
-        print(type(data['Price'][0]))
+        # print(type(data['Price'][0]))
         price.append(data['Price'][0])
         volume.append(data['Volumn'])
 
     return volume, price, time
 
 
-app = Flask(__name__)
-
-
-def predictor(comp,predict_len):
-    stock_price,stock_1,stock_2,stock_3,stock_4=fileReader(comp)
-    y,y_std=run.run(stock_price,predict_len)
-    y=y.tolist()
+def predictor(comp, predict_len):
+    stock_price, stock_1, stock_2, stock_3, stock_4 = fileReader(comp)
+    y, y_std = baysianPredict.run(stock_price, predict_len)
+    y = y.tolist()
     return (y[-predict_len:])
 
-#Using example, "AMZN" refers to companyname, 3 refers to prediction length
-y=predictor("AMZN",3)
+
+# Using example, "AMZN" refers to companyname, 3 refers to prediction length
+y = predictor("AMZN", 3)
 print(y)
+
+app = Flask(__name__)
 
 
 @app.route('/comp', methods=['GET'])
@@ -72,6 +74,7 @@ def company():
 @app.route('/')
 def index():
     return render_template("index.html")
+
 
 if __name__ == '__main__':
     app.run()
