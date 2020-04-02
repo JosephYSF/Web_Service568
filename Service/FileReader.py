@@ -15,6 +15,3 @@ def readFile(filename):
             return close_price
         except:
             f.close()
-
-
-
