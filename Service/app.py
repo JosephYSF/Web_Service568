@@ -5,7 +5,7 @@ from Service import baysianPredict
 
 
 def fileReader(comp):
-    with open('/Users/mindyp/JosephYSF/data/' + comp + '.json', 'r', encoding='utf-8') as f:
+    with open('/Users/sf/Desktop/RU/ECE_568/Web Service/JosephYSF/data/' + comp + '.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
     testJson = data
     stock_price_close = []
@@ -26,7 +26,7 @@ def realTimeReader(comp):
     volume = []
     price = []
     time = []
-    with open('/Users/mindyp/JosephYSF/data/' + comp + '_realtime_data.json', 'r', encoding='utf-8') as f:
+    with open('/Users/sf/Desktop/RU/ECE_568/Web Service/JosephYSF/data/' + comp + '_realtime_data.json', 'r', encoding='utf-8') as f:
         data = json.loads(f.read())
         # print(type(data['Time']))
         time.append(data['Time'])
