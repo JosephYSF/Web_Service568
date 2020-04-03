@@ -23,13 +23,13 @@
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="navbar-brand-wrapper d-flex justify-content-center">
-        <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">  
+        <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
           <a class="navbar-brand brand-logo" href="index.html"><img src="/static/images/logo.svg" alt="logo"/></a>
           <a class="navbar-brand brand-logo-mini" href="index.html"><img src="/static/images/logo-mini.svg" alt="logo"/></a>
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-sort-variant"></span>
           </button>
-        </div>  
+        </div>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <ul class="navbar-nav mr-lg-4 w-100">
@@ -292,14 +292,16 @@
                               </a>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkA">
                                 <button class="dropdown-item" onclick="comp('AMZN')">Amazon</button>
-                                <button class="dropdown-item" onclick="comp(2)">comp2</button>
-                                <button class="dropdown-item" onclick="comp(3)">comp3</button>
-                                <button class="dropdown-item" onclick="comp(4)">comp4</button>
-                                <button class="dropdown-item" onclick="comp(5)">comp5</button>
-                                <button class="dropdown-item" onclick="comp(6)">comp6</button>
-                                <button class="dropdown-item" onclick="comp(7)">comp7</button>
-                                <button class="dropdown-item" onclick="comp(8)">comp8</button>
-                                <button class="dropdown-item" onclick="comp(9)">comp9</button>
+                                <button class="dropdown-item" onclick="comp('AAPL')">Apple</button>
+                                <button class="dropdown-item" onclick="comp('AMD')">AMD</button>
+                                <button class="dropdown-item" onclick="comp('NVDA')">NVIDIA</button>
+                                <button class="dropdown-item" onclick="comp('GOOG')">Google</button>
+                                <button class="dropdown-item" onclick="comp('IBM')">IBM</button>
+                                <button class="dropdown-item" onclick="comp('INTC')">Intel</button>
+                                <button class="dropdown-item" onclick="comp('MSFT')">MicroSoft</button>
+                                <button class="dropdown-item" onclick="comp('OVTZ')">Oculus VisionTech</button>
+                                  <button class="dropdown-item" onclick="comp('SBUX')">Starbucks</button>
+
                               </div>
                             </div>
                           </div>
@@ -456,7 +458,7 @@
                   <h1>$ 28835</h1>
                   <h4>Gross sales over the years</h4>
                   <p class="text-muted">Today, many people rely on computers to do homework, work, and create or store useful information. Therefore, it is important </p>
-                  <div id="total-sales-chart-legend"></div>                  
+                  <div id="total-sales-chart-legend"></div>
                 </div>
                 <canvas id="total-sales-chart"></canvas>
               </div>
