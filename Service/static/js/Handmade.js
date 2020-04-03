@@ -1,5 +1,5 @@
 function comp(x) {
-    // alert("sdfadfasdfasdfqwefsdaf");
+    //alert("sdfadfasdfasdfqwefsdaf");
     clearCache();
     var xmlHttp = new XMLHttpRequest();
     var url = "/comp" + "?ops=" + x;
@@ -18,21 +18,30 @@ function comp(x) {
             var alldate = obj['allDate'];
             var date1 = []
             for (var i = 0; i < alldate.length; i++) {
-                date1.push(alldate[i])
+                date1.push(alldate[i]);
             }
             var allClose = obj['allClose'];
             var data1 = []
             for (var i = 0; i < allClose.length; i++) {
-                data1.push(allClose[i])
+                data1.push(allClose[i]);
             }
+
+            // pred part
+            var pred=obj['pred'];
+            var pred0=pred[0].toFixed(3);
+            var pred1=pred[1].toFixed(3);
+            var pred2=pred[2].toFixed(3);
 
             // document.getElementById("result").innerHTML = data;
             if (true) {
                 document.getElementById("compname").innerHTML = compName;
-                document.getElementById("Close").innerHTML = closePrice;
-                document.getElementById("High").innerHTML = highPrice;
-                document.getElementById("Low").innerHTML = lowPrice;
+                document.getElementById("Close").innerHTML = closePrice.toFixed(3);
+                document.getElementById("High").innerHTML = highPrice.toFixed(3);
+                document.getElementById("Low").innerHTML = lowPrice.toFixed(3);
                 document.getElementById("Volume").innerHTML = volume;
+                document.getElementById("pred0").innerHTML = pred0;
+                document.getElementById("pred1").innerHTML = pred1;
+                document.getElementById("pred2").innerHTML = pred2;
 
                 // alert("display")
             }

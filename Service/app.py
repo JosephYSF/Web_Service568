@@ -57,17 +57,20 @@ def company():
     stock_price_close, stock_price_high, stock_price_low, stock_volume, stock_date = fileReader(ops)
     volumn, price, time = realTimeReader(ops)
     # closePrice is the real time data
-    closePrice = price[len(volumn) - 1]
+    closePrice = float(price[len(volumn) - 1])
 
-    highPrice = stock_price_high[len(stock_price_high) - 1]
+    highPrice = float(stock_price_high[len(stock_price_high) - 1])
 
-    lowPrice = stock_price_low[len(stock_price_low) - 1]
+    lowPrice = float(stock_price_low[len(stock_price_low) - 1])
 
     # volume is the real time volume
     volume = volumn[len(volumn) - 1]
 
+    # predict part
+    pred=predictor(ops,3)
+
     result = {"res": ops, "close": closePrice, "High": highPrice, "Low": lowPrice, "Volume": volume,
-              "allDate": stock_date, "allClose": stock_price_close}
+              "allDate": stock_date, "allClose": stock_price_close, "pred":pred}
     return result
 
 
