@@ -1,8 +1,37 @@
 from flask import Flask, render_template, request
 import json
-
+import pandas_datareader.data as web
+import datetime
+import re
+import requests
+from apscheduler.schedulers.blocking import BlockingScheduler
+import pymongo
 from Service import baysianPredict
 
+url_base = 'https://www.cnbc.com/quotes/?symbol='
+client = pymongo.MongoClient('localhost')
+db = client['stock']
+
+
+def get_realtime_data(comp):
+        url = url_base + comp
+        strhtml = requests.get(url)
+        price = r'<meta itemprop="price" content="(.*?)" />'
+        volume = r'"I":{"styles":{"A":""},"values":{"B":"(.*?)"}},"J":'
+        timestamp = datetime.datetime.now()
+        text_price = re.findall(price, strhtml.text, re.S | re.M)
+        text_volume = re.findall(volume, strhtml.text, re.S | re.M)
+        realtime = {"Time": timestamp,
+                    "Price": text_price,
+                    "Volumn": text_volume}
+        collection1 = db[comp + '_realtime_data']
+        db.drop_collection(collection1)
+        collection1.insert(realtime)
+        # to run the program, you need to change the direction here
+        dir_short = "/Users/sf/Desktop/RU/ECE_568/Web Service/JosephYSF/Service/static/data/" + comp + "_realtime_data.json"
+        with open(dir_short, "a") as f:
+            json.dump(realtime, f, indent=4, sort_keys=True, default=str)
+            print(comp + " Realtime  File Written Successfully...")
 
 def fileReader(comp):
     with open('/Users/sf/Desktop/RU/ECE_568/Web Service/JosephYSF/data/' + comp + '.json', 'r', encoding='utf-8') as f:
@@ -23,6 +52,7 @@ def fileReader(comp):
 
 
 def realTimeReader(comp):
+    # get_realtime_data(comp)
     volume = []
     price = []
     time = []
