@@ -29,13 +29,39 @@ def get_realtime_data(comp):
         db.drop_collection(collection1)
         collection1.insert(realtime)
         # to run the program, you need to change the direction here
-        dir_short = "/Users/sf/Desktop/RU/ECE_568/Web Service/JosephYSF/Service/static/data/" + comp + "_realtime_data.json"
-        with open(dir_short, "a") as f:
+        dir_short = "../Service/static/data/" + comp + "_realtime_data.json"
+        with open(dir_short, "w+") as f:
             json.dump(realtime, f, indent=4, sort_keys=True, default=str)
             print(comp + " Realtime  File Written Successfully...")
 
+
+def get_historical_data(comp):
+    start_time = datetime.datetime.strptime("2019,1,1", "%Y,%m,%d")
+    end = datetime.date.today()
+    company1 = web.DataReader(comp, "yahoo", start_time, end)
+    time = []
+    for i in company1.index:
+        time.append(datetime.datetime.strftime(i, "%Y-%m-%d"))
+    company1['index'] = time
+    company1['Time'] = time
+    dict = company1.set_index('index').T.to_dict('dict')
+    output = []
+    collection2 = db[comp + '_historical_data']
+    db.drop_collection(collection2)
+    for day in dict:
+        collection2.insert(dict[day])
+    for i in collection2.find():
+        i['_id'] = re.findall("'(.*)'", i.get('_id').__repr__())[0]
+        output.append(i)
+    with open('../Service/static/data/' + comp +
+              '_historical_data.json', 'w', encoding="UTF-8") as jf:
+        jf.write(json.dumps(output, indent=2))
+        # print(comp + " Historical File Written Successfully...")
+
+
 def fileReader(comp):
-    with open('../data/' + comp + '.json', 'r', encoding='utf-8') as f:
+    get_historical_data(comp)
+    with open('../Service/static/data/' + comp + '_historical_data.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
     testJson = data
     stock_price_close = []
@@ -53,11 +79,11 @@ def fileReader(comp):
 
 
 def realTimeReader(comp):
-    # get_realtime_data(comp)
+    get_realtime_data(comp)
     volume = []
     price = []
     time = []
-    with open('/Users/sf/Desktop/RU/ECE_568/Web Service/JosephYSF/data/' + comp + '_realtime_data.json', 'r', encoding='utf-8') as f:
+    with open('../Service/static/data/' + comp + '_realtime_data.json', 'r', encoding='utf-8') as f:
         data = json.loads(f.read())
         # print(type(data['Time']))
         time.append(data['Time'])
