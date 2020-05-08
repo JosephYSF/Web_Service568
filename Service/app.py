@@ -34,7 +34,7 @@ def get_realtime_data(comp):
             print(comp + " Realtime  File Written Successfully...")
 
 def fileReader(comp):
-    with open('/Users/sf/Desktop/RU/ECE_568/Web Service/JosephYSF/data/' + comp + '.json', 'r', encoding='utf-8') as f:
+    with open('../data/' + comp + '.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
     testJson = data
     stock_price_close = []
