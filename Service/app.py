@@ -7,6 +7,7 @@ import requests
 from apscheduler.schedulers.blocking import BlockingScheduler
 import pymongo
 from Service import baysianPredict
+from Service import SVR
 
 url_base = 'https://www.cnbc.com/quotes/?symbol='
 client = pymongo.MongoClient('localhost')
@@ -77,6 +78,8 @@ def predictor(comp, predict_len):
 # Using example, "AMZN" refers to companyname, 3 refers to prediction length
 y = predictor("AMZN", 3)
 print(y)
+SVR_result=SVR.run("AMZN",3)
+print(SVR_result)
 
 app = Flask(__name__)
 
