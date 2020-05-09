@@ -65,20 +65,23 @@ def fileReader(comp):
     with open('../Service/static/data/' + comp + '_historical_data.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
     testJson = data
+    stock_price_open = []
     stock_price_close = []
     stock_price_high = []
     stock_price_low = []
     stock_volume = []
     stock_date = []
     for i in testJson:
+        stock_price_open.append(i['Open'])
         stock_price_close.append(i['Close'])
         stock_price_high.append(i['High'])
         stock_price_low.append(i['Low'])
         stock_date.append(i['Time'])
         stock_volume.append(i['Volume'])
     ema12, ema26, diff, dea, bar = indicator.get_macd(stock_price_close)
-    print('EMA12 of ' + comp + ' is', ema12)
-    print('EMA26 of ' + comp + ' is', ema26)
+    vr = indicator.get_vr(stock_volume, stock_price_open, stock_price_close)
+    # print('EMA12 of ' + comp + ' is', ema12)
+    # print('EMA26 of ' + comp + ' is', ema26)
     return stock_price_close, stock_price_high, stock_price_low, stock_volume, stock_date
 
 
