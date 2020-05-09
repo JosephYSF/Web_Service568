@@ -82,7 +82,7 @@ def fileReader(comp):
     vr = indicator.get_vr(stock_volume, stock_price_open, stock_price_close)
     # print('EMA12 of ' + comp + ' is', ema12)
     # print('EMA26 of ' + comp + ' is', ema26)
-    return stock_price_close, stock_price_high, stock_price_low, stock_volume, stock_date
+    return stock_price_close, stock_price_high, stock_price_low, stock_volume, stock_date, ema12, ema26, diff, dea
 
 
 def realTimeReader(comp):
@@ -120,7 +120,7 @@ app = Flask(__name__)
 @app.route('/comp', methods=['GET'])
 def company():
     ops = request.args.get('ops')
-    stock_price_close, stock_price_high, stock_price_low, stock_volume, stock_date = fileReader(ops)
+    stock_price_close, stock_price_high, stock_price_low, stock_volume, stock_date, ema12, ema26, diff, dea = fileReader(ops)
     volumn, price, time = realTimeReader(ops)
     # closePrice is the real time data
     closePrice = float(price[len(volumn) - 1])
@@ -136,7 +136,7 @@ def company():
     pred = predictor(ops, 3)
 
     result = {"res": ops, "close": closePrice, "High": highPrice, "Low": lowPrice, "Volume": volume,
-              "allDate": stock_date, "allClose": stock_price_close, "pred":pred}
+              "allDate": stock_date, "allClose": stock_price_close, "pred": pred, "ema12": ema12, "ema26": ema26, "diff": diff, "dea": dea}
     return result
 
 

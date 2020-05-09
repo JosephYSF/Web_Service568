@@ -16,6 +16,10 @@ function comp(x) {
             var lowPrice = obj['Low'];
             var volume = obj['Volume'];
             var alldate = obj['allDate'];
+            var ema12 = obj['ema12'];
+            var ema26 = obj['ema26'];
+            var diff = obj['diff'];
+            var dea = obj['dea'];
             var date1 = []
             for (var i = 0; i < alldate.length; i++) {
                 date1.push(alldate[i]);
@@ -24,6 +28,26 @@ function comp(x) {
             var data1 = []
             for (var i = 0; i < allClose.length; i++) {
                 data1.push(allClose[i]);
+            }
+
+            var ema12_data = []
+            for (var i = 0; i < ema12.length; i++) {
+                ema12_data.push(ema12[i]);
+            }
+
+            var ema26_data = []
+            for (var i = 0; i < ema26.length; i++) {
+                ema26_data.push(ema26[i]);
+            }
+
+            var diff_data = []
+            for (var i = 0; i < diff.length; i++) {
+                diff_data.push(diff[i]);
+            }
+
+            var dea_data = []
+            for (var i = 0; i < dea.length; i++) {
+                dea_data.push(dea[i]);
             }
 
             // pred part
@@ -49,7 +73,7 @@ function comp(x) {
             var data = {
                 labels: date1,
                 datasets: [{
-                    label: '# of Votes',
+                    label: ' close price',
                     data: data1,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
@@ -60,7 +84,7 @@ function comp(x) {
                         'rgba(255, 159, 64, 0.2)'
                     ],
                     borderColor: [
-                        'rgba(255,99,132,1)',
+                        'rgb(255,99,132)',
                         'rgba(54, 162, 235, 1)',
                         'rgba(255, 206, 86, 1)',
                         'rgba(75, 192, 192, 1)',
@@ -69,7 +93,30 @@ function comp(x) {
                     ],
                     borderWidth: 1,
                     fill: false
-                }]
+                },
+                {
+                    label: ' ema12',
+                    data: ema12_data,
+                    backgroundColor: [
+                        'rgba(99,102,255,0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgb(99,138,255)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    fill: false
+                }
+                ]
             };
             var multiLineData = {
                 labels: date1,
