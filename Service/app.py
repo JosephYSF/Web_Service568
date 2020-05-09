@@ -8,6 +8,7 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 import pymongo
 from Service import baysianPredict
 from Service import SVR
+from Service import indicator
 
 url_base = 'https://www.cnbc.com/quotes/?symbol='
 client = pymongo.MongoClient('localhost')
@@ -75,6 +76,9 @@ def fileReader(comp):
         stock_price_low.append(i['Low'])
         stock_date.append(i['Time'])
         stock_volume.append(i['Volume'])
+    ema12, ema26, diff, dea, bar = indicator.get_macd(stock_price_close)
+    print('EMA12 of ' + comp + ' is', ema12)
+    print('EMA26 of ' + comp + ' is', ema26)
     return stock_price_close, stock_price_high, stock_price_low, stock_volume, stock_date
 
 
@@ -104,7 +108,7 @@ def predictor(comp, predict_len):
 # Using example, "AMZN" refers to companyname, 3 refers to prediction length
 y = predictor("AMZN", 3)
 print(y)
-SVR_result=SVR.run("AMZN",3)
+SVR_result = SVR.run("AMZN",3)
 print(SVR_result)
 
 app = Flask(__name__)
@@ -126,7 +130,7 @@ def company():
     volume = volumn[len(volumn) - 1]
 
     # predict part
-    pred=predictor(ops,3)
+    pred = predictor(ops, 3)
 
     result = {"res": ops, "close": closePrice, "High": highPrice, "Low": lowPrice, "Volume": volume,
               "allDate": stock_date, "allClose": stock_price_close, "pred":pred}
