@@ -85,11 +85,6 @@ function comp(x) {
                     ],
                     borderColor: [
                         'rgb(255,99,132)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
                     ],
                     borderWidth: 1,
                     fill: false
@@ -98,7 +93,7 @@ function comp(x) {
                     label: ' ema12',
                     data: ema12_data,
                     backgroundColor: [
-                        'rgba(99,102,255,0.2)',
+                        'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
                         'rgba(255, 206, 86, 0.2)',
                         'rgba(75, 192, 192, 0.2)',
@@ -107,15 +102,45 @@ function comp(x) {
                     ],
                     borderColor: [
                         'rgb(99,138,255)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    fill: false
+                },
+                {
+                    label: ' diff',
+                    data: diff_data,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgb(255,211,99)',
+                    ],
+                    borderWidth: 1,
+                    fill: false
+                },
+                {
+                    label: ' dea',
+                    data: dea,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgb(182,99,255)',
                     ],
                     borderWidth: 1,
                     fill: false
                 }
+
                 ]
             };
             var multiLineData = {

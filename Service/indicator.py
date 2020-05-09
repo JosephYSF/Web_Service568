@@ -25,7 +25,7 @@ def get_macd(cps):
             diff[i] = ema12[i] - ema26[i]
             dea[i] = dea[i - 1] * 0.8 + diff[i] * 0.2
             bar[i] = 2 * (diff[i] - dea[i])
-    return ema12. ema26, diff, dea, bar
+    return ema12, ema26, diff, dea, bar
 
 
 def get_vr(vos, ops, cps):
