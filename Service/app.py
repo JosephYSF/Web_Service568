@@ -9,7 +9,7 @@ import pymongo
 from Service import baysianPredict
 from Service import SVR
 from Service import indicator
-from Service import ANN
+# from Service import ANN
 
 url_base = 'https://www.cnbc.com/quotes/?symbol='
 client = pymongo.MongoClient('localhost')

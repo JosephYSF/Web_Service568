@@ -1,4 +1,3 @@
-import time
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow import keras
@@ -6,12 +5,9 @@ from sklearn.metrics import r2_score
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.callbacks import EarlyStopping
-import json
 import pandas as pd
-from pandas.io.json import json_normalize
 import pandas_datareader.data as web
 import datetime
-import numpy as np
 import json
 import pymongo
 import re
