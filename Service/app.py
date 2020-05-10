@@ -9,6 +9,7 @@ import pymongo
 from Service import baysianPredict
 from Service import SVR
 from Service import indicator
+from Service import ANN
 
 url_base = 'https://www.cnbc.com/quotes/?symbol='
 client = pymongo.MongoClient('localhost')
@@ -16,24 +17,24 @@ db = client['stock']
 
 
 def get_realtime_data(comp):
-        url = url_base + comp
-        strhtml = requests.get(url)
-        price = r'<meta itemprop="price" content="(.*?)" />'
-        volume = r'"I":{"styles":{"A":""},"values":{"B":"(.*?)"}},"J":'
-        timestamp = datetime.datetime.now()
-        text_price = re.findall(price, strhtml.text, re.S | re.M)
-        text_volume = re.findall(volume, strhtml.text, re.S | re.M)
-        realtime = {"Time": timestamp,
-                    "Price": text_price,
-                    "Volumn": text_volume}
-        collection1 = db[comp + '_realtime_data']
-        db.drop_collection(collection1)
-        collection1.insert(realtime)
-        # to run the program, you need to change the direction here
-        dir_short = "../Service/static/data/" + comp + "_realtime_data.json"
-        with open(dir_short, "w+") as f:
-            json.dump(realtime, f, indent=4, sort_keys=True, default=str)
-            print(comp + " Realtime  File Written Successfully...")
+    url = url_base + comp
+    strhtml = requests.get(url)
+    price = r'<meta itemprop="price" content="(.*?)" />'
+    volume = r'"I":{"styles":{"A":""},"values":{"B":"(.*?)"}},"J":'
+    timestamp = datetime.datetime.now()
+    text_price = re.findall(price, strhtml.text, re.S | re.M)
+    text_volume = re.findall(volume, strhtml.text, re.S | re.M)
+    realtime = {"Time": timestamp,
+                "Price": text_price,
+                "Volumn": text_volume}
+    collection1 = db[comp + '_realtime_data']
+    db.drop_collection(collection1)
+    collection1.insert(realtime)
+    # to run the program, you need to change the direction here
+    dir_short = "../Service/static/data/" + comp + "_realtime_data.json"
+    with open(dir_short, "w+") as f:
+        json.dump(realtime, f, indent=4, sort_keys=True, default=str)
+        print(comp + " Realtime  File Written Successfully...")
 
 
 def get_historical_data(comp):
@@ -102,17 +103,18 @@ def realTimeReader(comp):
 
 
 def predictor(comp, predict_len):
-    stock_price, stock_1, stock_2, stock_3, stock_4 = fileReader(comp)
+    stock_price, stock_1, stock_2, stock_3, stock_4, ema12, ema26, diff, dea = fileReader(comp)
     y, y_std = baysianPredict.run(stock_price, predict_len)
     y = y.tolist()
+    Advice = ANN.ann_predict(comp)
     return (y[-predict_len:])
 
 
 # Using example, "AMZN" refers to companyname, 3 refers to prediction length
-y = predictor("AMZN", 3)
-print(y)
-SVR_result = SVR.run("AMZN",3)
-print(SVR_result)
+# y = predictor("AMZN", 3)
+# print(y)
+# SVR_result = SVR.run("AMZN",3)
+# print(SVR_result)
 
 app = Flask(__name__)
 
@@ -120,7 +122,8 @@ app = Flask(__name__)
 @app.route('/comp', methods=['GET'])
 def company():
     ops = request.args.get('ops')
-    stock_price_close, stock_price_high, stock_price_low, stock_volume, stock_date, ema12, ema26, diff, dea = fileReader(ops)
+    stock_price_close, stock_price_high, stock_price_low, stock_volume, stock_date, ema12, ema26, diff, dea = fileReader(
+        ops)
     volumn, price, time = realTimeReader(ops)
     # closePrice is the real time data
     closePrice = float(price[len(volumn) - 1])
@@ -136,7 +139,8 @@ def company():
     pred = predictor(ops, 3)
 
     result = {"res": ops, "close": closePrice, "High": highPrice, "Low": lowPrice, "Volume": volume,
-              "allDate": stock_date, "allClose": stock_price_close, "pred": pred, "ema12": ema12, "ema26": ema26, "diff": diff, "dea": dea}
+              "allDate": stock_date, "allClose": stock_price_close, "pred": pred, "ema12": ema12, "ema26": ema26,
+              "diff": diff, "dea": dea}
     return result
 
 
