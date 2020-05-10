@@ -9,12 +9,11 @@ import pymongo
 from Service import baysianPredict
 from Service import SVR
 from Service import indicator
-from Service import ANN
+# from Service import ANN
 
 url_base = 'https://www.cnbc.com/quotes/?symbol='
-client = pymongo.MongoClient('localhost')
-db = client['stock']
-company_name = ["GOOG", "MSFT", "AAPL", "NVDA", "SBUX", "AMZN", "OVTZ", "IBM", "AMD", "INTC"]
+# client = pymongo.MongoClient('localhost')
+# db = client['stock']
 
 
 def get_realtime_data(comp):
@@ -63,7 +62,7 @@ def get_historical_data(comp):
 
 
 def fileReader(comp):
-    get_historical_data(comp)
+    # get_historical_data(comp)
     with open('../Service/static/data/' + comp + '_historical_data.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
     testJson = data
@@ -88,7 +87,7 @@ def fileReader(comp):
 
 
 def realTimeReader(comp):
-    get_realtime_data(comp)
+    # get_realtime_data(comp)
     volume = []
     price = []
     time = []
@@ -121,11 +120,12 @@ def predictor(comp, predict_len):
 # print(y)
 # SVR_result = SVR.run("AMZN",3)
 # print(SVR_result)
-advices = dict()
-for comp in company_name:
-    advice = ANN.ann_predict(comp)
-    advices[comp] = advice
-print(advices)
+# advice = ANN.ann_predict('GOOG')
+# advices = dict()
+# for comp in company_name:
+#     advice = ANN.ann_predict(comp)
+#     advices[comp] = advice
+# print(advices)
 
 app = Flask(__name__)
 
@@ -147,10 +147,9 @@ def company():
 
     # predict part
     pred = predictor(ops, 3)
-
     result = {"res": ops, "close": closePrice, "High": highPrice, "Low": lowPrice, "Volume": volume,
               "allDate": stock_date, "allClose": stock_price_close, "pred": pred, "ema12": ema12, "ema26": ema26,
-              "diff": diff, "dea": dea}
+              "diff": diff, "dea": dea, "highest": 0, "avg": 0, "lowest": 0, "advice": "Sell"}
     return result
 
 

@@ -1,5 +1,5 @@
 function comp(x) {
-    //alert("sdfadfasdfasdfqwefsdaf");
+    // alert("sdfadfasdfasdfqwefsdaf");
     clearCache();
     var xmlHttp = new XMLHttpRequest();
     var url = "/comp" + "?ops=" + x;
@@ -23,7 +23,9 @@ function comp(x) {
             var highest = obj['highest'];
             var avg = obj['avg'];
             var lowest = obj['lowest'];
+            var advice = obj['advice'];
             var date1 = []
+
             for (var i = 0; i < alldate.length; i++) {
                 date1.push(alldate[i]);
             }
@@ -69,9 +71,10 @@ function comp(x) {
                 document.getElementById("pred0").innerHTML = pred0;
                 document.getElementById("pred1").innerHTML = pred1;
                 document.getElementById("pred2").innerHTML = pred2;
-                document.getElementById("Highest").innerHTML = highest;
-                document.getElementById("Avg").innerHTML = avg;
-                document.getElementById("Lowest").innerHTML = lowest;
+                document.getElementById("Highest").innerHTML = highest.toFixed(3);
+                document.getElementById("Avg").innerHTML = avg.toFixed(3);
+                document.getElementById("Lowest").innerHTML = lowest.toFixed(3);
+                document.getElementById("advice").innerHTML = advice;
 
                 // alert("display")
             }
