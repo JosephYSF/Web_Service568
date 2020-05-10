@@ -9,7 +9,7 @@ import pymongo
 from Service import baysianPredict
 from Service import SVR
 from Service import indicator
-# from Service import ANN
+from Service import ANN
 
 url_base = 'https://www.cnbc.com/quotes/?symbol='
 client = pymongo.MongoClient('localhost')
@@ -120,6 +120,7 @@ def predictor(comp, predict_len):
 # print(y)
 # SVR_result = SVR.run("AMZN",3)
 # print(SVR_result)
+advice = ANN.ann_predict('GOOG')
 
 app = Flask(__name__)
 
@@ -127,8 +128,7 @@ app = Flask(__name__)
 @app.route('/comp', methods=['GET'])
 def company():
     ops = request.args.get('ops')
-    stock_price_close, stock_price_high, stock_price_low, stock_volume, stock_date, ema12, ema26, diff, dea = fileReader(
-        ops)
+    stock_price_close, stock_price_high, stock_price_low, stock_volume, stock_date, ema12, ema26, diff, dea = fileReader(ops)
     volumn, price, time = realTimeReader(ops)
     # closePrice is the real time data
     closePrice = float(price[len(volumn) - 1])
