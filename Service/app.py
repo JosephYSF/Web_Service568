@@ -14,6 +14,7 @@ from Service import ANN
 url_base = 'https://www.cnbc.com/quotes/?symbol='
 client = pymongo.MongoClient('localhost')
 db = client['stock']
+company_name = ["GOOG", "MSFT", "AAPL", "NVDA", "SBUX", "AMZN", "OVTZ", "IBM", "AMD", "INTC"]
 
 
 def get_realtime_data(comp):
@@ -120,7 +121,11 @@ def predictor(comp, predict_len):
 # print(y)
 # SVR_result = SVR.run("AMZN",3)
 # print(SVR_result)
-advice = ANN.ann_predict('GOOG')
+advices = dict()
+for comp in company_name:
+    advice = ANN.ann_predict(comp)
+    advices[comp] = advice
+print(advices)
 
 app = Flask(__name__)
 
