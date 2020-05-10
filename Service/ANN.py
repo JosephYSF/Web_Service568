@@ -126,11 +126,11 @@ def ann_predict(comp):
     price_now = train_sc[len(train_sc) - 1]
     # print("The stock price for 10 days later will be", price_pred, ".")
     if abs((price_pred - price_now) / price_now) < 0.05:
-        advice = "The stock price will be stable."
+        advice = "The stock price in future ten days will be stable."
     elif price_pred > price_now:
-        advice = "The stock price will rise! Please consider purchasing more shares!"
+        advice = "The stock price in future ten days will rise! Please consider purchasing more shares!"
     else:
-        advice = "The stock price will drop! Please consider selling your shares!"
+        advice = "The stock price in future ten days will drop! Please consider selling your shares!"
     return advice
 
 
