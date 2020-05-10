@@ -70,7 +70,7 @@ function comp(x) {
                 // alert("display")
             }
             //  Chart Part
-            var data = {
+            var data_a = {
                 labels: date1,
                 datasets: [{
                     label: ' close price',
@@ -143,37 +143,7 @@ function comp(x) {
 
                 ]
             };
-            var multiLineData = {
-                labels: date1,
-                datasets: [{
-                    label: 'Dataset 1',
-                    data: data1,
-                    borderColor: [
-                        '#587ce4'
-                    ],
-                    borderWidth: 2,
-                    fill: false
-                },
-                    {
-                        label: 'Dataset 2',
-                        data: data1,
-                        borderColor: [
-                            '#ede190'
-                        ],
-                        borderWidth: 2,
-                        fill: false
-                    },
-                    {
-                        label: 'Dataset 3',
-                        data: data1,
-                        borderColor: [
-                            '#f44252'
-                        ],
-                        borderWidth: 2,
-                        fill: false
-                    }
-                ]
-            };
+
             var options = {
                 scales: {
                     yAxes: [{
@@ -192,195 +162,6 @@ function comp(x) {
                 }
 
             };
-            var doughnutPieData = {
-                datasets: [{
-                    data: data1,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.5)',
-                        'rgba(54, 162, 235, 0.5)',
-                        'rgba(255, 206, 86, 0.5)',
-                        'rgba(75, 192, 192, 0.5)',
-                        'rgba(153, 102, 255, 0.5)',
-                        'rgba(255, 159, 64, 0.5)'
-                    ],
-                    borderColor: [
-                        'rgba(255,99,132,1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                }],
-
-                // These labels appear in the legend and in the tooltips when hovering different arcs
-                labels: [
-                    'Pink',
-                    'Blue',
-                    'Yellow',
-                ]
-            };
-            var doughnutPieOptions = {
-                responsive: true,
-                animation: {
-                    animateScale: true,
-                    animateRotate: true
-                }
-            };
-            var areaData = {
-                labels: date1,
-                datasets: [{
-                    label: '# of Votes',
-                    data: data1,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255,99,132,1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1,
-                    fill: true, // 3: no fill
-                }]
-            };
-
-            var areaOptions = {
-                plugins: {
-                    filler: {
-                        propagate: true
-                    }
-                }
-            }
-
-            var multiAreaData = {
-                labels: date1,
-                datasets: [{
-                    label: 'Facebook',
-                    data: data1,
-                    borderColor: ['rgba(255, 99, 132, 0.5)'],
-                    backgroundColor: ['rgba(255, 99, 132, 0.5)'],
-                    borderWidth: 1,
-                    fill: true
-                },
-                    {
-                        label: 'Twitter',
-                        data: data1,
-                        borderColor: ['rgba(54, 162, 235, 0.5)'],
-                        backgroundColor: ['rgba(54, 162, 235, 0.5)'],
-                        borderWidth: 1,
-                        fill: true
-                    },
-                    {
-                        label: 'Linkedin',
-                        data: data1,
-                        borderColor: ['rgba(255, 206, 86, 0.5)'],
-                        backgroundColor: ['rgba(255, 206, 86, 0.5)'],
-                        borderWidth: 1,
-                        fill: true
-                    }
-                ]
-            };
-
-            var multiAreaOptions = {
-                plugins: {
-                    filler: {
-                        propagate: true
-                    }
-                },
-                elements: {
-                    point: {
-                        radius: 0
-                    }
-                },
-                scales: {
-                    xAxes: [{
-                        gridLines: {
-                            display: false
-                        }
-                    }],
-                    yAxes: [{
-                        gridLines: {
-                            display: false
-                        }
-                    }]
-                }
-            }
-
-            var scatterChartData = {
-                datasets: [{
-                    label: 'First Dataset',
-                    data: [{
-                        x: -10,
-                        y: 0
-                    },
-                        {
-                            x: 0,
-                            y: 3
-                        },
-                        {
-                            x: -25,
-                            y: 5
-                        },
-                        {
-                            x: 40,
-                            y: 5
-                        }
-                    ],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255,99,132,1)'
-                    ],
-                    borderWidth: 1
-                },
-                    {
-                        label: 'Second Dataset',
-                        data: [{
-                            x: 10,
-                            y: 5
-                        },
-                            {
-                                x: 20,
-                                y: -30
-                            },
-                            {
-                                x: -25,
-                                y: 15
-                            },
-                            {
-                                x: -10,
-                                y: 5
-                            }
-                        ],
-                        backgroundColor: [
-                            'rgba(54, 162, 235, 0.2)',
-                        ],
-                        borderColor: [
-                            'rgba(54, 162, 235, 1)',
-                        ],
-                        borderWidth: 1
-                    }
-                ]
-            }
-
-            var scatterChartOptions = {
-                scales: {
-                    xAxes: [{
-                        type: 'linear',
-                        position: 'bottom'
-                    }]
-                }
-            }
             // Get context with jQuery - using jQuery's .get() method.
             if ($("#barChart").length) {
                 var barChartCanvas = $("#barChart").get(0).getContext("2d");
@@ -396,7 +177,7 @@ function comp(x) {
                 var lineChartCanvas = $("#myChart").get(0).getContext("2d");
                 var lineChart = new Chart(lineChartCanvas, {
                     type: 'line',
-                    data: data,
+                    data: data_a,
                     options: options
                 });
             }
