@@ -106,8 +106,13 @@ def predictor(comp, predict_len):
     stock_price, stock_1, stock_2, stock_3, stock_4, ema12, ema26, diff, dea = fileReader(comp)
     y, y_std = baysianPredict.run(stock_price, predict_len)
     y = y.tolist()
-    advice = ANN.ann_predict(comp)
-    return (y[-predict_len:]), advice
+    SVR_result = SVR.run(comp, predict_len)
+    SVR_result = SVR_result.tolist()
+    # advice = ANN.ann_predict(comp)
+    result = []
+    for i in range(predict_len):
+        result.append(y[i] * 0.3 + SVR_result[i] * 0.7)
+    return result[-predict_len:]
 
 
 # Using example, "AMZN" refers to companyname, 3 refers to prediction length
@@ -136,7 +141,7 @@ def company():
     volume = volumn[len(volumn) - 1]
 
     # predict part
-    pred, advice = predictor(ops, 3)
+    pred = predictor(ops, 3)
 
     result = {"res": ops, "close": closePrice, "High": highPrice, "Low": lowPrice, "Volume": volume,
               "allDate": stock_date, "allClose": stock_price_close, "pred": pred, "ema12": ema12, "ema26": ema26,
