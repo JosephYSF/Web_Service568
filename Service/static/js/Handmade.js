@@ -20,6 +20,9 @@ function comp(x) {
             var ema26 = obj['ema26'];
             var diff = obj['diff'];
             var dea = obj['dea'];
+            var highest = obj['highest'];
+            var avg = obj['avg'];
+            var lowest = obj['lowest'];
             var date1 = []
             for (var i = 0; i < alldate.length; i++) {
                 date1.push(alldate[i]);
@@ -66,6 +69,9 @@ function comp(x) {
                 document.getElementById("pred0").innerHTML = pred0;
                 document.getElementById("pred1").innerHTML = pred1;
                 document.getElementById("pred2").innerHTML = pred2;
+                document.getElementById("Highest").innerHTML = highest;
+                document.getElementById("Avg").innerHTML = avg;
+                document.getElementById("Lowest").innerHTML = lowest;
 
                 // alert("display")
             }
