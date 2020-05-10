@@ -10,6 +10,7 @@ from Service import baysianPredict
 from Service import SVR
 from Service import indicator
 from Service import ANN
+from Service import DB_query
 
 url_base = 'https://www.cnbc.com/quotes/?symbol='
 client = pymongo.MongoClient('localhost')
@@ -148,10 +149,13 @@ def company():
 
     # predict part
     pred = predictor(ops, 3)
+    highest=DB_query.find_highest_in10(ops)
+    avg=DB_query.find_average_oneyear(ops)
+    lowest=DB_query.find_lowest_oneyear(ops)
     suggestion = advices
     result = {"res": ops, "close": closePrice, "High": highPrice, "Low": lowPrice, "Volume": volume,
               "allDate": stock_date, "allClose": stock_price_close, "pred": pred, "ema12": ema12, "ema26": ema26,
-              "diff": diff, "dea": dea, "highest": 0, "avg": 0, "lowest": 0, "advice": suggestion[ops]}
+              "diff": diff, "dea": dea, "highest": highest, "avg": avg, "lowest": lowest, "advice": suggestion[ops]}
     return result
 
 
